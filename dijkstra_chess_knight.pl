@@ -20,17 +20,17 @@ traverse(From) :-
 	retractall(edge(_,_)),           % Remove all the facts edge(_,_)
 	traverse(From,[],0).              % Let's begin to construct the path, starting from the origin node.
 	
-traverse(From, Path, Dist) :-		    % Traverse all the neighbours of node From.
+traverse(From, Path, Dist) :-		    % Traverse all the neighbors of node From.
 	path(From, T, D),		    % For each neighbour T
 	not(memberchk(T, Path)),	    %	if node T hasn't been visited earlier (it's not in the path)
 	shorterPath([T,From|Path], Dist+D), %	Create a fact edge(Path, Dist) if that fact doesn't exist, or update it if it exists
-	traverse(T,[From|Path],Dist+D).	    %	Do the same thing for node T, find all its neighbours...
+	traverse(T,[From|Path],Dist+D).	    %	Do the same thing for node T, find all its neighbors...
 	
 traverse(_).
  
 % -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-% --------------------------------------------------- Finding the neighbours --------------------------------------------------------------------------------
+% --------------------------------------------------- Finding the neighbors --------------------------------------------------------------------------------
  
 path(From,To,Dist) :- neighbour(From,To,Dist).
  
